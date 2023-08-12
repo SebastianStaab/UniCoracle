@@ -9,7 +9,7 @@ import coracle
 import pandas as pd
 
 
-def tdc(aSV, target, tax, threshold = 0.2, uc = True, uc_threshold = 0.15):
+def hic(aSV, target, tax, threshold = 0.2, uc = True, uc_threshold = 0.15):
     """
     Algorithm to analyse hierarchical ASV datasets and identify bacteria/ASV that are associated with a continuous target variable
     First it uses the UniCor algorithm to propagate the most unique and valuable features to the next higher level (preserve information). Then a top-down skimming approach uses Coracle to select the [threshold] top partition consecutively at each level. The lowest level is once again anylized with Coracle and given back as the final result.
@@ -112,7 +112,7 @@ def tdc(aSV, target, tax, threshold = 0.2, uc = True, uc_threshold = 0.15):
     ###########################################################################
     for i in range(len(tax_levels)): #for every taxonomic level
         selected = [] #list of selected groups to propagate
-        highest_level = filtered_ASV.groupby([tax_levels[i]]).sum().transpose() #start at the highest level
+        highest_level = filtered_ASV.groupby([tax_levels[i]]).sum(numeric_only=True).transpose() #start at the highest level
         highest_level = target.merge(highest_level, left_index=True, right_index=True) #merge with target variable
         x = highest_level.iloc[:,1:] 
         y = highest_level.iloc[:,0].to_frame()
