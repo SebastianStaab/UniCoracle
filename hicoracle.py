@@ -1,15 +1,22 @@
 # -*- coding: utf-8 -*-
 """
+Created on Tue Sep  3 09:58:03 2024
+
+@author: JohnDoe2Go
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Wed Dec 14 11:35:53 2022
 
 @author: JohnDoe
 """
-from uni_cor import uniCor
+from uni_cor import uniCorP
 import coracle
 import pandas as pd
 
 
-def hic(aSV, target, tax, threshold = 0.2, uc = True, uc_threshold = 0.15):
+def hic(aSV, target, tax, n_features = 100, uc = True, uc_threshold = 0.15):
     """
     Algorithm to analyse hierarchical ASV datasets and identify bacteria/ASV that are associated with a continuous target variable
     First it uses the UniCor algorithm to propagate the most unique and valuable features to the next higher level (preserve information). Then a top-down skimming approach uses Coracle to select the [threshold] top partition consecutively at each level. The lowest level is once again anylized with Coracle and given back as the final result.
@@ -22,8 +29,10 @@ def hic(aSV, target, tax, threshold = 0.2, uc = True, uc_threshold = 0.15):
         Continuous target variable
     tax : pd.dataframe
         Taxonomic hierarchy
-    threshold : bool, optional
-        Propagation threshold. Has to be between 0 and 1. Gives the proportion of the best performing groups that are propagated to the next lower level. Default is 0.2. In general you want this value to be as small as possible for runtime efficiency reasons.
+    n_features : int, optional
+        Number of features to select at each level. Default is 100.
+    uc: bool, optional
+        True if unicor should be applied, False if only the top down skimming approach should be used. 
     uc_threshold : bool, optional
         UniCor metric threshold. Can only be between 0 and 1. Optimal values depend on the dataset. The default is 0.15.
 
@@ -51,15 +60,13 @@ def hic(aSV, target, tax, threshold = 0.2, uc = True, uc_threshold = 0.15):
         raise TypeError("TypeError exception thrown. Expected pandas dataframe for target")
     if not isinstance(tax, (pd.DataFrame, pd.Series)):
         raise TypeError("TypeError exception thrown. Expected pandas dataframe for tax")
-    if not isinstance(threshold, (float)):
-        raise TypeError("TypeError exception thrown. Expected float for threshold")
+    if not isinstance(n_features, int) or n_features <= 1:
+        raise ValueError("ValueError exception thrown. Expected n_features to be a positive integer. In order to keep compositionality it has to be above 1.")
     if not isinstance(uc, (bool)):
         raise TypeError("TypeError exception thrown. Expected bool for uc")
     if not isinstance(uc_threshold, (float)):
         raise TypeError("TypeError exception thrown. Expected float uc_threshold")
     #check values    
-    if threshold > 1 or threshold < 0:
-        raise ValueError("ValueError exception thrown. threshold is expected to be a float between 0 and 1")
     if uc_threshold > 1 or uc_threshold < 0:
         raise ValueError("ValueError exception thrown. uc_threshold is expected to be a float between 0 and 1")
     #check dimensions
@@ -101,7 +108,7 @@ def hic(aSV, target, tax, threshold = 0.2, uc = True, uc_threshold = 0.15):
     ### UniCor to filter ASV
     ###########################################################################
     if uc == True: #if UniCor is wanted
-        filtered_ASV = uniCor(aSV, target, tax, threshold=uc_threshold)
+        filtered_ASV = uniCorP(aSV, target, tax, threshold=uc_threshold)
     else: #if not
         aSV = aSV.loc[:, (aSV != 0).any(axis=0)]
         filtered_ASV = aSV.transpose().merge(tax, how="left", left_index=True, right_index=True)
@@ -111,31 +118,61 @@ def hic(aSV, target, tax, threshold = 0.2, uc = True, uc_threshold = 0.15):
     ### Top-Down Coracle propagation
     ###########################################################################
     for i in range(len(tax_levels)): #for every taxonomic level
+        print(tax_levels[i])
         selected = [] #list of selected groups to propagate
         highest_level = filtered_ASV.groupby([tax_levels[i]]).sum(numeric_only=True).transpose() #start at the highest level
         highest_level = target.merge(highest_level, left_index=True, right_index=True) #merge with target variable
         x = highest_level.iloc[:,1:] 
         y = highest_level.iloc[:,0].to_frame()
         
+        
         resultO = coracle.coracle(x, y, alpha_l1 = 10**(-2.9), alpha_clr = 10**(-0.4)) #run coracle
         result = resultO.iloc[3:,0] #select only the groups and their respective score
-        
-        for j in range(int(result.size * threshold)+1): #for every group within the threshold partition (always round up to prevent zero features)
-            if result[j] > 0: #if score is not null
-                #print(result.index[j])
-                selected.append(result.index[j]) #add to selected-list
-            else: #else print a warning that no more features will be added
-                if not selected:
-                    raise IndexError("IndexError exception thrown. No score above zero detected, no groups can be selected to the next level during the top-down skimming. Please check if their are valuable (R²>>0) results for any level")
+        if i == len(tax_levels)-1:
+            print(i)
+            break
+        # Loop through the top performing groups
+        for j in range(len(result)):
+            print(result.index[j], result[j])
+            if len(selected) >= n_features: 
+                # If we already have enough features, break
+                break
+            if result[j] > 0:
+                # If score is not null
+                group_features = filtered_ASV[filtered_ASV[tax_levels[i]] == result.index[j]]
+                group_features = group_features.groupby([tax_levels[i+1]]).sum(numeric_only=True)
+                # Get features for this group
+                if len(selected) + len(group_features) <= n_features-1:  # If adding all features won't exceed limit
+                    selected.extend(group_features.index.tolist())  # Add all features to selected
+                    print("adding", group_features.index.tolist())
                 else:
-                    print("Warning: as the score reached zero, threshold partition will not be fulfilled but will include the top", ((100*(j))/(result.size * threshold)), "percent")
-                    break
+                    # Sort remaining features by abundance
+                    group_features = group_features.sum(axis=1, numeric_only=True).sort_values(ascending=False)
+                    n_to_add = n_features - len(selected)-1 #-1 to leave room for the accumulated features
+                    selected.extend(group_features.index[:n_to_add].tolist())
+                    print("abundance adding", group_features.index[:n_to_add].tolist())# Add top features by abundance
+                    break  # Stop once we reach the required number of features
+            else:
+                if not selected:
+                    raise IndexError("IndexError exception thrown. No score above zero detected...")
+                else:
+                    print("Warning: threshold partition will not be fulfilled...")
         
+        # Accumulate remaining features to ensure compositionality
+        if len(selected) == n_features-1:
+            filtered_ASV.loc[~filtered_ASV[tax_levels[i+1]].isin(selected), tax_levels[i+1]] = "remaining features"
+            selected.extend(["remaining features"])
+            
+            if len(selected) < n_features:
+                print("Warning: final selection has fewer than", n_features, "features: ", len(selected))
         
-        filtered_ASV = filtered_ASV[filtered_ASV[tax_levels[i]].isin(selected)] #propagate them to the next level
+        print(len(selected), selected)
+        filtered_ASV = filtered_ASV[filtered_ASV[tax_levels[i+1]].isin(selected)] #propagate them to the next level
         
         
         
     ###########################################################################
     
     return resultO #return final coracle result
+
+

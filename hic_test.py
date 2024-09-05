@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Dec  9 07:54:11 2022
+Created on Thu Sep  5 09:23:45 2024
 
-@author: JohnDoe
+@author: JohnDoe2Go
 """
 
+#%%
 import pandas as pd
 from hicoracle import hic
+
 
 directory = "C:/Users/JohnDoe2Go/Downloads/" #use your path to the variables
 
@@ -17,7 +19,6 @@ tax = pd.read_csv(directory + "cbass_tax.csv", index_col=0) #read in cbass taxon
 y = ASV["ED50"].to_frame()
 ### 3. Combine ASV with tax
 x = ASV.iloc[:,3:]
-
 #%%
 import unittest
 
@@ -30,16 +31,16 @@ class TestWrongInput(unittest.TestCase):
         self.assertRaises(TypeError, hic, x, 1, tax)
     def test_wrong_input_tax(self): #tests if TypeError is thrown if tax file is not a pandas dataframe
         self.assertRaises(TypeError, hic, x, y, 1)
-    def test_wrong_input_threshold(self): #tests if TypeError is thrown for non-float/integer input for threshold
-        self.assertRaises(TypeError, hic, x, y, tax, "1")
+    def test_wrong_input_nfeatures(self): #tests if TypeError is thrown for non-float/integer input for threshold
+        self.assertRaises(ValueError, hic, x, y, tax, "1")
     def test_wrong_input_uc(self): #tests if TypeError is thrown for non boolean input for uc
         self.assertRaises(TypeError, hic, x, y, tax, uc=1)
     def test_wrong_input_uc_threshold(self): #tests if TypeError is thrown for non-float/integer input for uc_threshold
         self.assertRaises(TypeError, hic, x, y, tax, uc_threshold="1")
-    def test_wrong_threshold1(self): #tests ValueError is thrown if threshold not between 0 and 1
-        self.assertRaises(ValueError, hic, x, y, tax, 1.5)
-    def test_wrong_threshold2(self): #tests ValueError is thrown if threshold not between 0 and 1
-        self.assertRaises(ValueError, hic, x, y, tax, -1.1)
+    def test_wrong_nfeatures1(self): #tests ValueError is thrown if threshold not between 0 and 1
+        self.assertRaises(ValueError, hic, x, y, tax, n_features=1)
+    def test_wrong_nfeatures2(self): #tests ValueError is thrown if threshold not between 0 and 1
+        self.assertRaises(ValueError, hic, x, y, tax, n_features=-2.2)
     def test_wrong_uc_threshold1(self): #tests ValueError is thrown if threshold not between 0 and 1
         self.assertRaises(ValueError, hic, x, y, tax, uc_threshold=1.5)
     def test_wrong_uc_threshold2(self): #tests ValueError is thrown if threshold not between 0 and 1
@@ -57,9 +58,7 @@ class TestWrongInput(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main()
 
-
 #%%
-result_cbass84_hic_wo_unicor = hic(x, y, tax, uc = False)
+result_cbass84_hic_wo_unicor = hic(x, y, tax, n_features = 2, uc = False)
 #%%
-result_cbass84_hic = hic(x, y, tax)
-
+result_cbass84_hic = hic(x, y, tax, n_features = 100)
