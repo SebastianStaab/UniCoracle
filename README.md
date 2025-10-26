@@ -1,2 +1,2 @@
-# HiCoracle
- Hierarchical Coracle, based on bottom-up UniCorP and top-down skimming (TDS) Coracle
+# UniCoracle
+UniCoracle is a fully automated analytical framework that combines UniCorP’s bottom-up propagation approach (https://academic.oup.com/ismecommun/advance-article/doi/10.1093/ismeco/ycaf174/8269840) with a subsequent and newly developed top-down skimming (TDS) approach employing the Coracle ML framework (https://academic.oup.com/bioinformatics/article/40/1/btad749/7484655) to leverage inherent taxonomic structures of microbiome community data (e.g., 16S rRNA gene amplicon sequencing) for increasing predictive accuracy and reducing runtimes.
