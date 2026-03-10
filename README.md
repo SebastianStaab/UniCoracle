@@ -5,15 +5,9 @@ Source code: [SebastianStaab/UniCoracle](https://github.com/SebastianStaab/UniCo
 
 Combines [UniCorP bottom up propagation](https://doi.org/10.1093/ismeco/ycaf174) with [Coracle](https://doi.org/10.1093/bioinformatics/btad749) top down skimming (TDS).
 Exploits taxonomic structure of microbiome data.
-Increases predictive accuracy.
-Reduces runtimes.
-
-
-
 * UniCorP bottom up approach enriches higher taxonomic levels
 * TDS Coracle approach returns to lowest hierarchical level
-* Reduces noise
-* Provides highest feature resolution
+
 
 ## Input Format
 
