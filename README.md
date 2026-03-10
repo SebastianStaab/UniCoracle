@@ -3,7 +3,7 @@
 Open access web server: [micportal.org](https://micportal.org)
 Source code: [SebastianStaab/UniCoracle](https://github.com/SebastianStaab/UniCoracle)
 
-Combines UniCorP bottom up propagation with Coracle top down skimming (TDS).
+Combines [UniCorP bottom up propagation](https://doi.org/10.1093/ismeco/ycaf174) with [Coracle](https://doi.org/10.1093/bioinformatics/btad749) top down skimming (TDS).
 Exploits taxonomic structure of microbiome data.
 Increases predictive accuracy.
 Reduces runtimes.
@@ -43,7 +43,7 @@ Requires three input datasets:
 
 ### Core Parameters
 
-* `n_features`: Maximum features per hierarchical level - minimum 2 features (to keep compositionality), recommended *100*
-* UniCor metric selection: `uc_top_k` or `uc_threshold`, recommended *`uc_top_k` = 100* (like `n_features`)
-* Correlation method (`uc_method`): Pearson or *Spearman*
-* Transformation (`uc_transformation`): *Relative abundance*, centered log ratio, or raw counts
+* `n_features`: Maximum features per hierarchical level - minimum 2 features (to keep compositionality), recommended **100**
+* UniCor metric selection: `uc_top_k` or `uc_threshold`, recommended **`uc_top_k` = 100** (like `n_features`)
+* Correlation method (`uc_method`): Pearson or **Spearman**
+* Transformation (`uc_transformation`): **Relative abundance**, centered log ratio, or raw counts
