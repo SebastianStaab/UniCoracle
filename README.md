@@ -1,7 +1,8 @@
 ## UniCoracle: Automated Hierarchical Feature Selection
 
 Open access web server: [micportal.org](https://micportal.org)
-Source code: [SebastianStaab/UniCoracle](https://github.com/SebastianStaab/UniCoracle)
+Source code: [![DOI](https://zenodo.org/badge/676863744.svg)](https://doi.org/10.5281/zenodo.19050205)
+Supplementary Data: [![DOI](https://zenodo.org/badge/1098234753.svg)](https://doi.org/10.5281/zenodo.19050197)
 
 Combines [UniCorP bottom up propagation](https://doi.org/10.1093/ismeco/ycaf174) with [Coracle](https://doi.org/10.1093/bioinformatics/btad749) top down skimming (TDS).
 Exploits taxonomic structure of microbiome data.
