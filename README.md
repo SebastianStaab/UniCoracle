@@ -24,8 +24,8 @@ A sample-by-feature matrix, where rows represent individual samples and columns 
 A single-column table containing the continuous target variable (e.g., pH, temperature, biomass) for each sample. The index must match the sample IDs in the feature table.
 
 ### 3. Hierarchical structure data file (`tax`)
-A feature-by-level matrix describing the biological or functional hierarchy of the features. Each column corresponds to a feature (matching the columns in the feature table), and each row represents a hierarchical level, from broad (e.g., Phylum) to fine-grained (e.g., Genus or ASV).
-Missing values can be left blank or replaced with the feature ID itself. The order of levels should ideally go from highest (left) to lowest (right), although UniCorP can infer and adjust for reversed hierarchies.
+A feature-by-level matrix describing the biological or functional hierarchy of the features. Each row corresponds to a feature (matching the columns in the feature table), and each column represents a hierarchical level, from broad (e.g., Phylum) to fine-grained (e.g., Genus or ASV).
+Missing values can be left blank or replaced with the feature ID (recommended) itself. The order of levels should ideally go from highest (left) to lowest (right), although UniCorP can infer and adjust for reversed hierarchies.
 
 ### Hierarchy Requirements
 * The hierarchy must be a strict tree: each child node should have exactly one parent, and the number of nodes should decrease toward broader levels (e.g., Phylum > Class > Order).
@@ -38,7 +38,7 @@ Missing values can be left blank or replaced with the feature ID itself. The ord
 |---|---|---|---|---|
 | `x` (Feature) | Samples × Features | Sample IDs | Feature IDs | Numeric only |
 | `y` (Target) | Samples × 1 | Sample IDs | Target name | Continuous variable |
-| `tax` (Hierarchy)| Levels × Features | Levels | Feature IDs | Strict tree |
+| `tax` (Hierarchy)| Features × Levels | Feature IDs | Hierarchical Levels | Strict tree |
 
 ### Core Parameters
 
