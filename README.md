@@ -46,3 +46,7 @@ Missing values can be left blank or replaced with the feature ID (recommended) i
 * UniCor metric selection: `uc_top_k` or `uc_threshold`, recommended **`uc_top_k` = 100** (like `n_features`)
 * Correlation method (`uc_method`): Pearson or **Spearman**
 * Transformation (`uc_transformation`): **Relative abundance**, centered log ratio, or raw counts
+
+## License
+
+UniCoracle is released under the MIT License. See [LICENSE](LICENSE) for details.
