@@ -2,6 +2,8 @@
 
 Open access web server: [micportal.org](https://micportal.org)
 
+Open access publication: [https://doi.org/10.1093/bioinformatics/btag507]([url](https://doi.org/10.1093/bioinformatics/btag507)) 
+
 Zenodo: [![DOI](https://zenodo.org/badge/676863744.svg)](https://doi.org/10.5281/zenodo.19050205)
 
 
