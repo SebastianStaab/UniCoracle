@@ -1,71 +1,79 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite the following publication."
+message: "If you use UniCoracle, please cite both the software release and the associated publication."
 
-title: "UniCoracle: automated hierarchical feature selection via bottom-up propagation and top-down skimming using the UniCorP algorithm and the Coracle machine-learning framework"
+title: "UniCoracle"
 
 type: software
 
 authors:
   - family-names: Staab
     given-names: Sebastian
-    orcid: "https://orcid.org/0009-0007-1465-8670"
 
   - family-names: Cardénas
     given-names: Anny
-    orcid: "https://orcid.org/0000-0002-4080-9010"
 
   - family-names: Peixoto
     given-names: Raquel S.
-    orcid: "https://orcid.org/0000-0002-9536-3132"
 
   - family-names: Schreiber
     given-names: Falk
-    orcid: "https://orcid.org/0000-0002-9307-3254"
 
   - family-names: Voolstra
     given-names: Christian R.
-    orcid: "https://orcid.org/0000-0003-4555-3795"
+
+version: "1.0"
+
+date-released: "2026-03-16"
 
 repository-code: "https://github.com/SebastianStaab/UniCoracle"
 
-url: "https://github.com/SebastianStaab/UniCoracle"
+url: "https://doi.org/10.5281/zenodo.19050206"
+
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.19050206"
 
 license: MIT
 
 keywords:
   - bioinformatics
-  - microbiome
+  - coral genomics
+  - microbiome analysis
   - machine learning
-  - coral biology
-  - microbial community analysis
-  - feature selection
   - hierarchical feature selection
+  - feature selection
 
 abstract: >
-  UniCoracle is an automated framework combining the UniCorP algorithm
-  and the Coracle machine-learning framework for hierarchical feature
-  selection and microbial community analysis.
+  UniCoracle is a computational framework combining the UniCorP algorithm
+  and the Coracle machine-learning framework for automated hierarchical
+  feature selection and microbial community analysis.
 
-references:
-  - type: article
-    authors:
-      - family-names: Staab
-        given-names: Sebastian
-      - family-names: Cardénas
-        given-names: Anny
-      - family-names: Peixoto
-        given-names: Raquel S.
-      - family-names: Schreiber
-        given-names: Falk
-      - family-names: Voolstra
-        given-names: Christian R.
-    title: >
-      UniCoracle: automated hierarchical feature selection via bottom-up
-      propagation and top-down skimming using the UniCorP algorithm and
-      the Coracle machine-learning framework
-    journal: "Bioinformatics"
-    year: 2026
-    doi: "10.1093/bioinformatics/btag507"
+preferred-citation:
+  type: article
 
-keywords:
-  - software
+  authors:
+    - family-names: Staab
+      given-names: Sebastian
+
+    - family-names: Cardénas
+      given-names: Anny
+
+    - family-names: Peixoto
+      given-names: Raquel S.
+
+    - family-names: Schreiber
+      given-names: Falk
+
+    - family-names: Voolstra
+      given-names: Christian R.
+
+  title: >
+    UniCoracle: automated hierarchical feature selection via bottom-up
+    propagation and top-down skimming using the UniCorP algorithm and
+    the Coracle machine-learning framework
+
+  journal: "Bioinformatics"
+
+  year: 2026
+
+  doi: "10.1093/bioinformatics/btag507"
