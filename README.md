@@ -4,8 +4,7 @@ Open access web server: [micportal.org](https://micportal.org)
 
 Open access publication: [https://doi.org/10.1093/bioinformatics/btag507](https://doi.org/10.1093/bioinformatics/btag507)
 
-Zenodo: [https://doi.org/10.5281/zenodo.19050205](https://doi.org/10.5281/zenodo.19050205)
-
+Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19050206.svg)](https://doi.org/10.5281/zenodo.19050206)
 
 Combines [UniCorP bottom up propagation](https://doi.org/10.1093/ismeco/ycaf174) with [Coracle](https://doi.org/10.1093/bioinformatics/btad749) top down skimming (TDS).
 Exploits taxonomic structure of microbiome data.
