@@ -1,0 +1,71 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the following publication."
+
+title: "UniCoracle: automated hierarchical feature selection via bottom-up propagation and top-down skimming using the UniCorP algorithm and the Coracle machine-learning framework"
+
+type: software
+
+authors:
+  - family-names: Staab
+    given-names: Sebastian
+    orcid: "https://orcid.org/0009-0007-1465-8670"
+
+  - family-names: Cardénas
+    given-names: Anny
+    orcid: "https://orcid.org/0000-0002-4080-9010"
+
+  - family-names: Peixoto
+    given-names: Raquel S.
+    orcid: "https://orcid.org/0000-0002-9536-3132"
+
+  - family-names: Schreiber
+    given-names: Falk
+    orcid: "https://orcid.org/0000-0002-9307-3254"
+
+  - family-names: Voolstra
+    given-names: Christian R.
+    orcid: "https://orcid.org/0000-0003-4555-3795"
+
+repository-code: "https://github.com/SebastianStaab/UniCoracle"
+
+url: "https://github.com/SebastianStaab/UniCoracle"
+
+license: MIT
+
+keywords:
+  - bioinformatics
+  - microbiome
+  - machine learning
+  - coral biology
+  - microbial community analysis
+  - feature selection
+  - hierarchical feature selection
+
+abstract: >
+  UniCoracle is an automated framework combining the UniCorP algorithm
+  and the Coracle machine-learning framework for hierarchical feature
+  selection and microbial community analysis.
+
+references:
+  - type: article
+    authors:
+      - family-names: Staab
+        given-names: Sebastian
+      - family-names: Cardénas
+        given-names: Anny
+      - family-names: Peixoto
+        given-names: Raquel S.
+      - family-names: Schreiber
+        given-names: Falk
+      - family-names: Voolstra
+        given-names: Christian R.
+    title: >
+      UniCoracle: automated hierarchical feature selection via bottom-up
+      propagation and top-down skimming using the UniCorP algorithm and
+      the Coracle machine-learning framework
+    journal: "Bioinformatics"
+    year: 2026
+    doi: "10.1093/bioinformatics/btag507"
+
+keywords:
+  - software
