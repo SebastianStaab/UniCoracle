@@ -2,9 +2,9 @@
 
 Open access web server: [micportal.org](https://micportal.org)
 
-Open access publication: [https://doi.org/10.1093/bioinformatics/btag507]([url](https://doi.org/10.1093/bioinformatics/btag507)) 
+Open access publication: [https://doi.org/10.1093/bioinformatics/btag507](https://doi.org/10.1093/bioinformatics/btag507)
 
-Zenodo: [![DOI](https://zenodo.org/badge/676863744.svg)](https://doi.org/10.5281/zenodo.19050205)
+Zenodo: [https://doi.org/10.5281/zenodo.19050205](https://doi.org/10.5281/zenodo.19050205)
 
 
 Combines [UniCorP bottom up propagation](https://doi.org/10.1093/ismeco/ycaf174) with [Coracle](https://doi.org/10.1093/bioinformatics/btad749) top down skimming (TDS).
