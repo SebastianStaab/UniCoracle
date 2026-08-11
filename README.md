@@ -7,9 +7,10 @@ Open access publication: [https://doi.org/10.1093/bioinformatics/btag507](https:
 Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19050206.svg)](https://doi.org/10.5281/zenodo.19050206)
 
 Combines [UniCorP bottom up propagation](https://doi.org/10.1093/ismeco/ycaf174) with [Coracle](https://doi.org/10.1093/bioinformatics/btad749) top down skimming (TDS).
-Exploits taxonomic structure of microbiome data.
+Exploits taxonomic structure of microbiome data. 
 * UniCorP bottom up approach enriches higher taxonomic levels
 * TDS Coracle approach returns to lowest hierarchical level
+UniCoracle was developed for microbial community feature selection associated with continous variables (e.g, thermal tolerance, seawater temperature, seawater salinity), with particular application to coral-associated microbiome datasets.
 
 
 ## Input Format
